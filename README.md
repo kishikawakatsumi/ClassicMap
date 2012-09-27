@@ -23,7 +23,7 @@ Distributed under the [MIT License][mit].
 [GPL]: http://www.gnu.org/licenses/gpl.html
 
 ## Contributors
-**Icon Design**  
+**Artwork and Icon Design**  
 [Takayuki Fukatsu](https://github.com/fladdict) a.k.a [fladdict](http://fladdict.net/blog/)
 
 ## License
