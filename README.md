@@ -8,9 +8,9 @@ A sample application to render Google Map tile images overlays in an Apple's map
 I borrowed many code from [iOS-MapLayerDemo](https://github.com/mtigas/iOS-MapLayerDemo). Thank you very much.  
 
 ------
-<img src="https://github.com/downloads/kishikawakatsumi/ClassicMap/1.png" style="width: 320px" />
-<img src="https://github.com/downloads/kishikawakatsumi/ClassicMap/2.png" style="width: 320px" />
-<img src="https://github.com/downloads/kishikawakatsumi/ClassicMap/4.png" style="width: 320px" />
+<img src="https://github.com/downloads/kishikawakatsumi/ClassicMap/1.png" alt="ScreenShot1" width="320px" style="width: 320px;" />
+<img src="https://github.com/downloads/kishikawakatsumi/ClassicMap/2.png" alt="ScreenShot2" width="320px" style="width: 320px;" />
+<img src="https://github.com/downloads/kishikawakatsumi/ClassicMap/4.png" alt="ScreenShot3" width="320px" style="width: 320px;" />
 
 
 ## 3rd party libraries
