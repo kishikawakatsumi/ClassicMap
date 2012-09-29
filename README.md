@@ -7,10 +7,9 @@ A sample application to render Google Map tile images overlays in an Apple's map
 I borrowed many code from [iOS-MapLayerDemo](https://github.com/mtigas/iOS-MapLayerDemo). Thank you very much.  
 
 ------
-<img src="https://github.com/downloads/kishikawakatsumi/ClassicMap/1.png" alt="ScreenShot1" width="320px" style="width: 320px;" />
-<img src="https://github.com/downloads/kishikawakatsumi/ClassicMap/2.png" alt="ScreenShot2" width="320px" style="width: 320px;" />
-<img src="https://github.com/downloads/kishikawakatsumi/ClassicMap/4.png" alt="ScreenShot3" width="320px" style="width: 320px;" />
-
+<img src="https://github.com/downloads/kishikawakatsumi/ClassicMap/5.png" alt="ScreenShot1" width="225px" style="width: 225px;" />&nbsp;
+<img src="https://github.com/downloads/kishikawakatsumi/ClassicMap/6.png" alt="ScreenShot2" width="225px" style="width: 225px;" />&nbsp;
+<img src="https://github.com/downloads/kishikawakatsumi/ClassicMap/7.png" alt="ScreenShot3" width="225px" style="width: 225px;" />&nbsp;
 
 ## 3rd party libraries
 
@@ -18,8 +17,8 @@ I borrowed many code from [iOS-MapLayerDemo](https://github.com/mtigas/iOS-MapLa
 [https://github.com/AFNetworking/AFNetworking](https://github.com/AFNetworking/AFNetworking)
 Distributed under the [MIT License][mit].
  
-[Apache]: http://www.apache.org/licenses/LICENSE-2.0
-[MIT]: http://www.opensource.org/licenses/mit-license.php
+[Apache]: http://www.apache.org/licenses/LICENSE-2.0  
+[MIT]: http://www.opensource.org/licenses/mit-license.php  
 [GPL]: http://www.gnu.org/licenses/gpl.html
 
 ## Contributors
