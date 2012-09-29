@@ -13,7 +13,7 @@ I borrowed many code from [iOS-MapLayerDemo](https://github.com/mtigas/iOS-MapLa
 
 ## 3rd party libraries
 
-[AFNetworking](https://github.com/AFNetworking/AFNetworking)  
+**AFNetworking**  
 [https://github.com/AFNetworking/AFNetworking](https://github.com/AFNetworking/AFNetworking)  
 Distributed under the [MIT License][MIT].
  
