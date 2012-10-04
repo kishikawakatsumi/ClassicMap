@@ -9,6 +9,12 @@
 #import <Foundation/Foundation.h>
 #import <MapKit/MapKit.h>
 
+enum {
+    WMMapSourceStandard = 0,
+    WMMapSourceGoogle
+};
+typedef NSUInteger WMMapSource;
+
 @interface WMOverlay : NSObject <MKOverlay>
 
 @property (nonatomic, readonly) MKMapType mapType;

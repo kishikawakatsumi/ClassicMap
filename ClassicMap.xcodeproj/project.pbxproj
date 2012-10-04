@@ -83,7 +83,6 @@
 		087F5B371612E6AB004BF7D9 /* AFXMLRequestOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AFXMLRequestOperation.m; path = Vendor/AFNetworking/AFXMLRequestOperation.m; sourceTree = SOURCE_ROOT; };
 		087F5B381612E6AB004BF7D9 /* UIImageView+AFNetworking.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIImageView+AFNetworking.h"; path = "Vendor/AFNetworking/UIImageView+AFNetworking.h"; sourceTree = SOURCE_ROOT; };
 		087F5B391612E6AB004BF7D9 /* UIImageView+AFNetworking.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIImageView+AFNetworking.m"; path = "Vendor/AFNetworking/UIImageView+AFNetworking.m"; sourceTree = SOURCE_ROOT; };
-		0BAE9433161E117C0010F07F /* WMOverlayConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WMOverlayConstants.h; sourceTree = "<group>"; };
 		1414DF4D1613D43000161754 /* Icon-72.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-72.png"; sourceTree = "<group>"; };
 		1414DF4E1613D43000161754 /* Icon-72@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-72@2x.png"; sourceTree = "<group>"; };
 		1414DF4F1613D43000161754 /* Icon-Small-50.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-Small-50.png"; sourceTree = "<group>"; };
@@ -157,7 +156,6 @@
 			children = (
 				14EAE0EB16120FE70026BD7C /* WMOverlay.h */,
 				14EAE0EC16120FE70026BD7C /* WMOverlay.m */,
-				0BAE9433161E117C0010F07F /* WMOverlayConstants.h */,
 				14EAE0F2161210A80026BD7C /* WMOverlayView.h */,
 				14EAE0F3161210A80026BD7C /* WMOverlayView.m */,
 				087F5B241612D13D004BF7D9 /* WMImageCache.h */,
@@ -467,7 +465,7 @@
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Katsumi Kishikawa";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				COPY_PHASE_STRIP = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
@@ -475,7 +473,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "D88D5E21-CCB2-4DB0-B670-4986EA1F57D1";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;

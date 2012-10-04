@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import <MapKit/MapKit.h>
-#import "WMOverlayConstants.h"
+#import "WMOverlay.h"
 
 @protocol WMConfigurationViewControllerDelegate;
 

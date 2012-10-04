@@ -9,10 +9,9 @@
 #import <UIKit/UIKit.h>
 #import <MapKit/MapKit.h>
 #import <CoreLocation/CoreLocation.h>
-#import "WMOverlayConstants.h"
-#import "WMConfigurationViewController.h"
+#import "WMOverlay.h"
 
-@interface WMMapViewController : UIViewController <MKMapViewDelegate, WMConfigurationViewControllerDelegate>
+@interface WMMapViewController : UIViewController
 
 @property (assign, nonatomic) MKMapType mapType;
 @property (assign, nonatomic) WMMapSource mapSource;

@@ -6,15 +6,15 @@
 //  Copyright (c) 2012 kishikawa katsumi. All rights reserved.
 //
 
-#import "AFNetworking.h"
 #import "WMMapViewController.h"
 #import "WMDetailViewController.h"
 #import "WMConfigurationViewController.h"
 #import "WMPlacemark.h"
 #import "WMOverlay.h"
 #import "WMOverlayView.h"
+#import "AFNetworking.h"
 
-@interface WMMapViewController () <UISearchBarDelegate, MKMapViewDelegate> {
+@interface WMMapViewController () <UISearchBarDelegate, MKMapViewDelegate, WMConfigurationViewControllerDelegate> {
     WMPlacemark *droppedPin;
 }
 
@@ -241,7 +241,7 @@
     return addressDictionary;
 }
 
-#pragma mark - MKMapViewDelegate
+#pragma mark -
 
 - (MKAnnotationView *)mapView:(MKMapView *)mapView viewForAnnotation:(id <MKAnnotation>)annotation; {
 	if (annotation == mapView.userLocation) {
@@ -288,7 +288,7 @@
     [self performSegueWithIdentifier:@"Details" sender:view];
 }
 
-#pragma mark - WMConfigurationViewControllerDelegate
+#pragma mark -
 
 - (void)configurationViewController:(WMConfigurationViewController *)controller mapSourceChanged:(WMMapSource)mapSource
 {
@@ -334,7 +334,6 @@
     [operation start];
 }
 
-
 - (void)configurationViewControllerWillPrintMap:(WMConfigurationViewController *)configurationViewController
 {
     UIPrintInteractionController *controller = [UIPrintInteractionController sharedPrintController];
@@ -354,11 +353,7 @@
     controller.printInfo = printInfo;
     controller.printFormatter = [_mapView viewPrintFormatter];
     
-    if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
-//        [controller presentFromBarButtonItem:printButton animated:YES completionHandler:completionHandler];
-    } else {
-        [controller presentAnimated:YES completionHandler:completionHandler];
-    }
+    [controller presentAnimated:YES completionHandler:completionHandler];
 }
 
 #pragma mark -
