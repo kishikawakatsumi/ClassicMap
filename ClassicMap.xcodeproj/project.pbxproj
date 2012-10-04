@@ -83,6 +83,8 @@
 		087F5B371612E6AB004BF7D9 /* AFXMLRequestOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AFXMLRequestOperation.m; path = Vendor/AFNetworking/AFXMLRequestOperation.m; sourceTree = SOURCE_ROOT; };
 		087F5B381612E6AB004BF7D9 /* UIImageView+AFNetworking.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIImageView+AFNetworking.h"; path = "Vendor/AFNetworking/UIImageView+AFNetworking.h"; sourceTree = SOURCE_ROOT; };
 		087F5B391612E6AB004BF7D9 /* UIImageView+AFNetworking.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIImageView+AFNetworking.m"; path = "Vendor/AFNetworking/UIImageView+AFNetworking.m"; sourceTree = SOURCE_ROOT; };
+		0B3E7F49161E2A23004C1089 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
+		0B3E7F4A161E2A23004C1089 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		1414DF4D1613D43000161754 /* Icon-72.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-72.png"; sourceTree = "<group>"; };
 		1414DF4E1613D43000161754 /* Icon-72@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-72@2x.png"; sourceTree = "<group>"; };
 		1414DF4F1613D43000161754 /* Icon-Small-50.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-Small-50.png"; sourceTree = "<group>"; };
@@ -319,6 +321,7 @@
 			knownRegions = (
 				en,
 				ja,
+				"zh-Hant",
 			);
 			mainGroup = 149A4038160F91540058468B;
 			productRefGroup = 149A4044160F91540058468B /* Products */;
@@ -395,6 +398,7 @@
 			children = (
 				149A4051160F91540058468B /* en */,
 				143EB24A160FC39A00CE83B2 /* ja */,
+				0B3E7F49161E2A23004C1089 /* zh-Hant */,
 			);
 			name = InfoPlist.strings;
 			sourceTree = "<group>";
@@ -420,6 +424,7 @@
 			children = (
 				14EAE10416122C6C0026BD7C /* en */,
 				14EAE10616122C700026BD7C /* ja */,
+				0B3E7F4A161E2A23004C1089 /* zh-Hant */,
 			);
 			name = Localizable.strings;
 			sourceTree = "<group>";

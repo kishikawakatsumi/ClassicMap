@@ -1,0 +1,27 @@
+/* 
+  Localizable.strings
+  WorldMap
+
+  Created by kishikawa katsumi on 2012/09/26.
+  Copyright (c) 2012年 kishikawa katsumi. All rights reserved.
+*/
+
+"Search or Address" = "搜尋或輸入地址";
+"Search" = "搜尋";
+"Directions" = "路線";
+
+"Info" = "資訊";
+"Address" = "地址";
+
+"Drop Pin" = "拖放大頭針";
+"Remove Pin" = "移除大頭針";
+"Replace Pin" = "取代大頭針";
+"Print" = "列印";
+"Dropped Pin" = "拖放大頭針";
+
+"Standard" = "標準";
+"Classic" = "復古";
+
+"Map" = "地圖";
+"Satellite" = "衛星";
+"Hybrid" = "混合";
