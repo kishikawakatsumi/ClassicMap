@@ -9,14 +9,10 @@
 #import <UIKit/UIKit.h>
 #import <MapKit/MapKit.h>
 #import <CoreLocation/CoreLocation.h>
+#import "WMOverlayConstants.h"
+#import "WMConfigurationViewController.h"
 
-enum {
-    WMMapSourceStandard = 0,
-    WMMapSourceGoogle
-};
-typedef NSUInteger WMMapSource;
-
-@interface WMMapViewController : UIViewController
+@interface WMMapViewController : UIViewController <MKMapViewDelegate, WMConfigurationViewControllerDelegate>
 
 @property (assign, nonatomic) MKMapType mapType;
 @property (assign, nonatomic) WMMapSource mapSource;

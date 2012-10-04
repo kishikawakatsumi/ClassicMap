@@ -8,11 +8,13 @@
 
 #import <UIKit/UIKit.h>
 #import <MapKit/MapKit.h>
-#import "WMMapViewController.h"
+#import "WMOverlayConstants.h"
+
+@protocol WMConfigurationViewControllerDelegate;
 
 @interface WMConfigurationViewController : UIViewController
 
-@property (weak, nonatomic) id delegate;
+@property (weak, nonatomic) id<WMConfigurationViewControllerDelegate> delegate;
 @property (assign, nonatomic) WMMapSource mapSource;
 @property (assign, nonatomic) MKMapType mapType;
 

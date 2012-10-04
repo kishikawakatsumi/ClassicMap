@@ -6,6 +6,7 @@
 //  Copyright (c) 2012 kishikawa katsumi. All rights reserved.
 //
 
+#import "AFNetworking.h"
 #import "WMMapViewController.h"
 #import "WMDetailViewController.h"
 #import "WMConfigurationViewController.h"
@@ -142,28 +143,70 @@
             [_mapView removeAnnotation:annotation];
         }
     }
+
+    NSString *searchString = [searchBar.text stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"https://maps.googleapis.com/maps/api/geocode/json?address=%@&sensor=true", searchString]];
+    NSURLRequest *request = [NSURLRequest requestWithURL:url];
     
-    MKMapRect visibleMapRect = _mapView.visibleMapRect;
-    MKMapPoint northeast = MKMapPointMake(MKMapRectGetMaxX(visibleMapRect), MKMapRectGetMinY(visibleMapRect));
-    MKMapPoint southwest = MKMapPointMake(MKMapRectGetMinX(visibleMapRect), MKMapRectGetMaxY(visibleMapRect));
-    CLLocationCoordinate2D neCoord = MKCoordinateForMapPoint(northeast);
-    CLLocationCoordinate2D swCoord = MKCoordinateForMapPoint(southwest);
-    CLLocationDistance diameter = [self getDistanceFrom:neCoord to:swCoord];
-    CLRegion *region = [[CLRegion alloc] initCircularRegionWithCenter:_mapView.centerCoordinate radius:(diameter / 2) identifier:@"search"];
+    AFJSONRequestOperation *operation = [AFJSONRequestOperation JSONRequestOperationWithRequest:request success:^(NSURLRequest *request, NSHTTPURLResponse *response, id JSON) {
+        NSString *status = [JSON valueForKeyPath:@"status"];
+        if ([status isEqualToString:@"OK"]) {
+            NSArray *results = [JSON valueForKeyPath:@"results"];
+            NSInteger index = 0;
+            for (id result in results) {
+                NSDictionary *location = [[result valueForKey:@"geometry"] valueForKey:@"location"];
+                NSNumber *lat = [location valueForKey:@"lat"];
+                NSNumber *lng = [location valueForKey:@"lng"];
+                CLLocationCoordinate2D coord = CLLocationCoordinate2DMake([lat doubleValue], [lng doubleValue]);
+
+                NSMutableDictionary *addressDictionary = [[NSMutableDictionary alloc] init];
+                addressDictionary[@"FormattedAddressLines"] = [((NSString *)[result valueForKey:@"formatted_address"]) componentsSeparatedByString:@", "];
+                for (id component in [result valueForKey:@"address_components"]) {
+                    NSArray *types = [component valueForKey:@"types"];
+                    id longName = [component valueForKey:@"long_name"];
+                    id shortName = [component valueForKey:@"short_name"];
+                    for (NSString *type in types) {
+                        if ([type isEqualToString:@"postal_code"]) {
+                            addressDictionary[@"ZIP"] = longName;
+                        }
+                        else if ([type isEqualToString:@"country"]) {
+                            addressDictionary[@"Country"] = longName;
+                            addressDictionary[@"CountryCode"] = shortName;
+                        }
+                        else if ([type isEqualToString:@"administrative_area_level_1"]) {
+                            addressDictionary[@"State"] = longName;
+                        }
+                        else if ([type isEqualToString:@"administrative_area_level_2"]) {
+                            addressDictionary[@"SubAdministrativeArea"] = longName;
+                        }
+                        else if ([type isEqualToString:@"locality"]) {
+                            addressDictionary[@"City"] = longName;
+                        }
+                        else if ([type isEqualToString:@"sublocality"]) {
+                            addressDictionary[@"SubLocality"] = longName;
+                        }
+                        else if ([type isEqualToString:@"establishment"]) {
+                            addressDictionary[@"Name"] = longName;
+                        }
+                        else if ([type isEqualToString:@"route"]) {
+                            addressDictionary[@"Thoroughfare"] = longName;
+                        }
+                        else if ([type isEqualToString:@"street_number"]) {
+                            addressDictionary[@"SubThoroughfare"] = longName;
+                        }
+                    }
+                }
+                if (index == 0) {
+                    [_mapView setCenterCoordinate:coord animated:NO];
+                }
+                MKPlacemark *placemark = [[MKPlacemark alloc] initWithCoordinate:coord addressDictionary:addressDictionary];
+                [_mapView addAnnotation:placemark];
+                index++;
+            }
+        }
+    } failure:nil];
     
-    [_geocoder geocodeAddressString:searchBar.text inRegion:region completionHandler:^(NSArray *placemarks, NSError *error)
-     {
-         if (!error) {
-             NSInteger index = 0;
-             for (CLPlacemark *placemark in placemarks) {
-                 if (index == 0) {
-                     [_mapView setCenterCoordinate:placemark.location.coordinate animated:NO];
-                 }
-                 [_mapView addAnnotation:[[MKPlacemark alloc] initWithPlacemark:placemark]];
-                 index++;
-             }
-         }
-     }];
+    [operation start];
     
     [self finishSearch];
 }
@@ -190,7 +233,7 @@
 	return [startLoccation distanceFromLocation:endLoccation];
 }
 
-#pragma mark -
+#pragma mark - MKMapViewDelegate
 
 - (MKAnnotationView *)mapView:(MKMapView *)mapView viewForAnnotation:(id <MKAnnotation>)annotation; {
 	if (annotation == mapView.userLocation) {
@@ -237,7 +280,8 @@
     [self performSegueWithIdentifier:@"Details" sender:view];
 }
 
-#pragma mark -
+#pragma mark - WMConfigurationViewControllerDelegate
+
 - (void)configurationViewController:(WMConfigurationViewController *)controller mapSourceChanged:(WMMapSource)mapSource
 {
     self.mapSource = mapSource;

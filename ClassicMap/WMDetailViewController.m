@@ -31,7 +31,13 @@
     _headerView.backgroundColor = [UIColor groupTableViewBackgroundColor];
     _titleLabel.text = [NSString stringWithFormat:@"<%g/%g>", _placemark.coordinate.latitude, _placemark.coordinate.longitude];
     _addressTitleLabel.text = NSLocalizedString(@"Address", nil);
-    _addressLabel.text = ABCreateStringWithAddressDictionary(_placemark.addressDictionary, YES);
+    NSArray *addressLines = [_placemark.addressDictionary objectForKey:@"FormattedAddressLines"];
+    if (addressLines) {
+        _addressLabel.text = [addressLines componentsJoinedByString:@", "];
+    }
+    else {
+        _addressLabel.text = ABCreateStringWithAddressDictionary(_placemark.addressDictionary, YES);
+    }
     
     _removePinLabel.text = NSLocalizedString(@"Remove Pin", nil);
     
