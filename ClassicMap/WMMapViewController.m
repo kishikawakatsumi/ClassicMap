@@ -26,7 +26,6 @@
 @property (weak, nonatomic) IBOutlet UIToolbar *toolbar;
 
 @property (strong, nonatomic) WMOverlay *overlay;
-@property (strong, nonatomic) CLGeocoder *geocoder;
 
 @end
 
@@ -37,7 +36,6 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(applicationDidEnterBackground:) name:UIApplicationDidEnterBackgroundNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(applicationWillEnterForeground:) name:UIApplicationWillEnterForegroundNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(applicationWillTerminate:) name:UIApplicationWillTerminateNotification object:nil];
-    self.geocoder = [[CLGeocoder alloc] init];
     [super awakeFromNib];
 }
 
@@ -154,48 +152,8 @@
             NSArray *results = [JSON valueForKeyPath:@"results"];
             NSInteger index = 0;
             for (id result in results) {
-                NSDictionary *location = [[result valueForKey:@"geometry"] valueForKey:@"location"];
-                NSNumber *lat = [location valueForKey:@"lat"];
-                NSNumber *lng = [location valueForKey:@"lng"];
-                CLLocationCoordinate2D coord = CLLocationCoordinate2DMake([lat doubleValue], [lng doubleValue]);
-
-                NSMutableDictionary *addressDictionary = [[NSMutableDictionary alloc] init];
-                addressDictionary[@"FormattedAddressLines"] = [((NSString *)[result valueForKey:@"formatted_address"]) componentsSeparatedByString:@", "];
-                for (id component in [result valueForKey:@"address_components"]) {
-                    NSArray *types = [component valueForKey:@"types"];
-                    id longName = [component valueForKey:@"long_name"];
-                    id shortName = [component valueForKey:@"short_name"];
-                    for (NSString *type in types) {
-                        if ([type isEqualToString:@"postal_code"]) {
-                            addressDictionary[@"ZIP"] = longName;
-                        }
-                        else if ([type isEqualToString:@"country"]) {
-                            addressDictionary[@"Country"] = longName;
-                            addressDictionary[@"CountryCode"] = shortName;
-                        }
-                        else if ([type isEqualToString:@"administrative_area_level_1"]) {
-                            addressDictionary[@"State"] = longName;
-                        }
-                        else if ([type isEqualToString:@"administrative_area_level_2"]) {
-                            addressDictionary[@"SubAdministrativeArea"] = longName;
-                        }
-                        else if ([type isEqualToString:@"locality"]) {
-                            addressDictionary[@"City"] = longName;
-                        }
-                        else if ([type isEqualToString:@"sublocality"]) {
-                            addressDictionary[@"SubLocality"] = longName;
-                        }
-                        else if ([type isEqualToString:@"establishment"]) {
-                            addressDictionary[@"Name"] = longName;
-                        }
-                        else if ([type isEqualToString:@"route"]) {
-                            addressDictionary[@"Thoroughfare"] = longName;
-                        }
-                        else if ([type isEqualToString:@"street_number"]) {
-                            addressDictionary[@"SubThoroughfare"] = longName;
-                        }
-                    }
-                }
+                CLLocationCoordinate2D coord = [self coordinateFromJSON:result];
+                NSDictionary *addressDictionary = [self addressDictionaryFromJSON:result];
                 if (index == 0) {
                     [_mapView setCenterCoordinate:coord animated:NO];
                 }
@@ -205,7 +163,6 @@
             }
         }
     } failure:nil];
-    
     [operation start];
     
     [self finishSearch];
@@ -231,6 +188,57 @@
 	CLLocation *endLoccation = [[CLLocation alloc] initWithLatitude:end.latitude longitude:end.longitude];
     
 	return [startLoccation distanceFromLocation:endLoccation];
+}
+
+- (CLLocationCoordinate2D)coordinateFromJSON:(id)JSON
+{
+    NSDictionary *location = [[JSON valueForKey:@"geometry"] valueForKey:@"location"];
+    NSNumber *lat = [location valueForKey:@"lat"];
+    NSNumber *lng = [location valueForKey:@"lng"];
+    CLLocationCoordinate2D coord = CLLocationCoordinate2DMake([lat doubleValue], [lng doubleValue]);
+    return coord;
+}
+
+- (NSDictionary *)addressDictionaryFromJSON:(id)JSON
+{
+    NSMutableDictionary *addressDictionary = [[NSMutableDictionary alloc] init];
+    addressDictionary[@"FormattedAddressLines"] = [((NSString *)[JSON valueForKey:@"formatted_address"]) componentsSeparatedByString:@", "];
+    for (id component in [JSON valueForKey:@"address_components"]) {
+        NSArray *types = [component valueForKey:@"types"];
+        id longName = [component valueForKey:@"long_name"];
+        id shortName = [component valueForKey:@"short_name"];
+        for (NSString *type in types) {
+            if ([type isEqualToString:@"postal_code"]) {
+                addressDictionary[@"ZIP"] = longName;
+            }
+            else if ([type isEqualToString:@"country"]) {
+                addressDictionary[@"Country"] = longName;
+                addressDictionary[@"CountryCode"] = shortName;
+            }
+            else if ([type isEqualToString:@"administrative_area_level_1"]) {
+                addressDictionary[@"State"] = longName;
+            }
+            else if ([type isEqualToString:@"administrative_area_level_2"]) {
+                addressDictionary[@"SubAdministrativeArea"] = longName;
+            }
+            else if ([type isEqualToString:@"locality"]) {
+                addressDictionary[@"City"] = longName;
+            }
+            else if ([type isEqualToString:@"sublocality"]) {
+                addressDictionary[@"SubLocality"] = longName;
+            }
+            else if ([type isEqualToString:@"establishment"]) {
+                addressDictionary[@"Name"] = longName;
+            }
+            else if ([type isEqualToString:@"route"]) {
+                addressDictionary[@"Thoroughfare"] = longName;
+            }
+            else if ([type isEqualToString:@"street_number"]) {
+                addressDictionary[@"SubThoroughfare"] = longName;
+            }
+        }
+    }
+    return addressDictionary;
 }
 
 #pragma mark - MKMapViewDelegate
@@ -302,16 +310,28 @@
     droppedPin.coordinate = centerCoordinate;
     droppedPin.title = NSLocalizedString(@"Dropped Pin", nil);
     [_mapView addAnnotation:droppedPin];
+
+    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"https://maps.googleapis.com/maps/api/geocode/json?latlng=%f%%2C%f&sensor=true", centerCoordinate.latitude, centerCoordinate.longitude]];
+    NSURLRequest *request = [NSURLRequest requestWithURL:url];
     
-    CLLocation *location = [[CLLocation alloc] initWithLatitude:centerCoordinate.latitude longitude:centerCoordinate.longitude];
-    [_geocoder reverseGeocodeLocation:location completionHandler:^(NSArray *placemarks, NSError *error)
-     {
-         if (!error && placemarks.count > 0) {
-             CLPlacemark *placemark = placemarks[0];
-             droppedPin.subtitle = ABCreateStringWithAddressDictionary(placemark.addressDictionary, NO);
-             droppedPin.addressDictionary = placemark.addressDictionary;
-         }
-     }];
+    AFJSONRequestOperation *operation = [AFJSONRequestOperation JSONRequestOperationWithRequest:request success:^(NSURLRequest *request, NSHTTPURLResponse *response, id JSON) {
+        NSString *status = [JSON valueForKeyPath:@"status"];
+        if ([status isEqualToString:@"OK"]) {
+            NSArray *results = [JSON valueForKeyPath:@"results"];
+            if (results.count > 0) {
+                NSDictionary *addressDictionary = [self addressDictionaryFromJSON:results[0]];
+                NSArray *addressLines = [addressDictionary objectForKey:@"FormattedAddressLines"];
+                if (addressLines) {
+                    droppedPin.subtitle = [addressLines componentsJoinedByString:@", "];
+                }
+                else {
+                    droppedPin.subtitle = ABCreateStringWithAddressDictionary(addressDictionary, NO);
+                }
+                droppedPin.addressDictionary = addressDictionary;
+            }
+        }
+    } failure:nil];
+    [operation start];
 }
 
 
