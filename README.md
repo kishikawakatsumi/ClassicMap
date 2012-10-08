@@ -1,6 +1,6 @@
 ClassicMap
 ==========
-<div><a href="http://click.linksynergy.com/fs-bin/click?id=SsjUadZH7vs&subid=&offerid=94348.1&type=10&tmpid=3910&RD_PARM1=http%3A%2F%2Fitunes.apple.com%2Fjp%2Fapp%2Fclassicmap%2Fid566173771%3Fmt%3D8"><img src="https://github.com/downloads/kishikawakatsumi/ClassicMap/Download_on_the_App_Store_Badge_US-UK_135x40_0801.svg" alt="Download on the App Store" /></a></div>
+<div><a href="http://click.linksynergy.com/fs-bin/click?id=SsjUadZH7vs&subid=&offerid=94348.1&type=10&tmpid=3910&RD_PARM1=http%3A%2F%2Fitunes.apple.com%2Fjp%2Fapp%2Fclassicmap%2Fid566173771%3Fmt%3D8"><embed type="image/svg+xml" src="https://github.com/downloads/kishikawakatsumi/ClassicMap/Download_on_the_App_Store_Badge_US-UK_135x40_0801.svg" alt="Download on the App Store" /></a></div>
 
 **Google Map is back to iOS 6.**  
 A sample application to render Google Map tile images overlays in an Apple's map in iOS 6.
