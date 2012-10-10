@@ -421,10 +421,4 @@
     [self saveSessionState];
 }
 
-- (void)requester:(id)arg1 didReceiveResponse:(id)arg2 forRequest:(id)arg3
-{
-    NSLog(@"%s", __func__);
-    
-}
-
 @end
