@@ -131,6 +131,8 @@
 		14EAE0F3161210A80026BD7C /* WMOverlayView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WMOverlayView.m; sourceTree = "<group>"; };
 		14EAE10416122C6C0026BD7C /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		14EAE10616122C700026BD7C /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/Localizable.strings; sourceTree = "<group>"; };
+		22DF54FC162B6634007C7157 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		22DF54FD162B6634007C7157 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Localizable.strings; sourceTree = "<group>"; };
 		9EA9C31716249F080059976E /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		9EA9C31816249F080059976E /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/Localizable.strings; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -325,6 +327,7 @@
 				ja,
 				"zh-Hant",
 				de,
+				ru,
 			);
 			mainGroup = 149A4038160F91540058468B;
 			productRefGroup = 149A4044160F91540058468B /* Products */;
@@ -403,6 +406,7 @@
 				143EB24A160FC39A00CE83B2 /* ja */,
 				0B3E7F49161E2A23004C1089 /* zh-Hant */,
 				9EA9C31716249F080059976E /* de */,
+				22DF54FC162B6634007C7157 /* ru */,
 			);
 			name = InfoPlist.strings;
 			sourceTree = "<group>";
@@ -430,6 +434,7 @@
 				14EAE10616122C700026BD7C /* ja */,
 				0B3E7F4A161E2A23004C1089 /* zh-Hant */,
 				9EA9C31816249F080059976E /* de */,
+				22DF54FD162B6634007C7157 /* ru */,
 			);
 			name = Localizable.strings;
 			sourceTree = "<group>";
