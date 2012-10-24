@@ -1,5 +1,7 @@
 ClassicMap
 ==========
+See also... [YAMapKit](https://github.com/kishikawakatsumi/YAMapKit)  
+
 **Google Map is back to iOS 6.**  
 A sample application to render Google Map tile images overlays in an Apple's map in iOS 6.
   
