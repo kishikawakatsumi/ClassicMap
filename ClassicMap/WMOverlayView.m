@@ -146,6 +146,7 @@
             CGContextTranslateCTM(context, 0.0f, image.size.height / scale);
             CGContextScaleCTM(context, 1.0f, -1.0f);
             CGContextDrawImage(context, CGRectMake(0.0f, 0.0f, image.size.width / scale, image.size.height / scale), croppedImage);
+            CGImageRelease(croppedImage);
         }
     } else  {
         UIGraphicsPushContext(context);
